@@ -1,0 +1,1 @@
+python train2.py --output_dir=outputs/truck/oct_allpnts_raw+_dc_inverse_lr3e-5 --gin_file=configs/dataset/objaverse.gin --gin_file=configs/model/ptv3.gin --gin_file=configs/train/default.gin

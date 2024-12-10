@@ -42,7 +42,7 @@ def rasterize_gaussians_to_singleimg(gs_params, camera_to_world, cx, cy, fx, fy,
     viewmat[:3, 3:4] = T_inv
 
     means = gs_params['means']
-    scales = torch.exp(gs_params['scales'])
+    scales = torch.exp(gs_params['scales']) # exp for activation
     quats = gs_params['quats']/torch.norm(gs_params['quats'], dim=-1, keepdim=True)
     mask = (quats.norm(dim=-1) - 1)<1e-6
     inv_mask = ~mask

@@ -22,27 +22,29 @@ def build_optimizer(model,
                     lr_dict: gin.REQUIRED, 
                     optimizer_type: gin.REQUIRED,
                     optimizer_params):  
-    params_lr = []
-    if type(model) == FeaturePredictor:
-        if model.backbone_type != 'empty':
-            params_lr.append({'params': model.backbone.parameters(), 'lr': lr_dict['backbone']})
-        for feature in model.features_outputhead.keys():
-            lr = lr_dict.get(feature, lr_dict['base'])
-            params_lr.append({'params': model.features_outputhead[feature].parameters(), 'lr': lr})
-    else:
-        for param in model.parameters():
-            lr = lr_dict.get(param, lr_dict['base'])
-            params_lr.append({'params': param, 'lr': lr})
+#     params_lr = []
+#     if type(model) == FeaturePredictor:
+#         if model.backbone_type != 'empty':
+#             params_lr.append({'params': model.backbone.parameters(), 'lr': lr_dict['backbone']})
+#         for feature in model.features_outputhead.keys():
+#             lr = lr_dict.get(feature, lr_dict['base'])
+#             params_lr.append({'params': model.features_outputhead[feature].parameters(), 'lr': lr})
+#     else:
+#         for param in model.parameters():
+#             lr = lr_dict.get(param, lr_dict['base'])
+#             params_lr.append({'params': param, 'lr': lr})
 
-    if optimizer_type.lower() == 'adam':
-        optimizer = torch.optim.Adam(params_lr, 
-                                     lr = lr_dict['base'],
-                                     **optimizer_params)
-    elif optimizer_type.lower() == 'sgd':
-        optimizer = torch.optim.SGD(params_lr, 
-                                    lr = lr_dict['base'])
-    else:
-        raise NotImplementedError
+#     if optimizer_type.lower() == 'adam':
+#         optimizer = torch.optim.Adam(params_lr, 
+#                                      lr = lr_dict['base'],
+#                                      **optimizer_params)
+#     elif optimizer_type.lower() == 'sgd':
+#         optimizer = torch.optim.SGD(params_lr, 
+#                                     lr = lr_dict['base'])
+#     else:
+#         raise NotImplementedError
+#     return optimizer
+    optimizer = torch.optim.Adam(model.parameters(), lr=3e-5, weight_decay=0.05)
     return optimizer
 
 @gin.configurable

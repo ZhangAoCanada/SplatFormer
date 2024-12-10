@@ -1,8 +1,8 @@
-ngpus=8
-accumulate_step=4
+ngpus=4
+accumulate_step=2
 batch_size=$((ngpus * accumulate_step))
 
-torchrun --nnodes=1 --nproc_per_node=${ngpus} --rdzv-endpoint=localhost:29518 \
+/home/ZHANGAo_2024/.conda/envs/splatformer/bin/torchrun --nnodes=1 --nproc_per_node=${ngpus} --rdzv-endpoint=localhost:29518 \
     train.py \
     --output_dir=outputs/objaverse_splatformer \
     --gin_file=configs/dataset/objaverse.gin \
