@@ -20,7 +20,7 @@ pip install Pointcept/
 pip install flash-attn --no-build-isolation
 
 # Install Other dependencies
-pip install requirements.txt
+pip install -r requirements.txt
 
 # Install gsplat
 pip install git+https://github.com/nerfstudio-project/gsplat.git@v0.1.11
